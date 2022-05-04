@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:object="${user}">
+  <p th:text="'用户ID：' + *{userId}" />
+  <p th:text="'用户名称：' + *{username}" />
+  <p th:text="'密码：' + *{password}" />
+</div>
+</body>
+</html>

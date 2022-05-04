@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.guanli.mapper.PageMapper">
+    <insert id="saveArticle" >
+        insert into article(title,content,views,create_time)
+        values (#{title},#{content},#{views},#{create_time})
+    </insert>
+
+    <select id="getAllArticle" resultType="int">
+        select count(*)
+        from article
+    </select>
+
+    <update id="views" >
+        update article
+        set views=#{views}
+        where articleId=#{articleId}
+    </update>
+
+    <select id="check" resultType="com.example.guanli.domain.Article">
+        select *
+        from article
+        where articleId=#{articleId}
+    </select>
+
+    <select id="queryArticle" parameterType="int" resultType="com.example.guanli.domain.Article">
+        select *
+        from article
+        order by articleId desc
+        limit #{start},2
+    </select>
+
+    <select id="searchArticle" resultType="com.example.guanli.domain.Article">
+        select *
+        from article
+        where articleId like '%${name}%'
+    </select>
+</mapper>

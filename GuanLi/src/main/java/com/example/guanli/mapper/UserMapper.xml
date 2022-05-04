@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.guanli.mapper.UserMapper">
+    <resultMap id="result" type="com.example.guanli.domain.UpmsUser">
+        <result property="userId" column="userId" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+    </resultMap>
+
+    <select id="queryPage" resultMap="result" parameterType="Integer">
+        select *
+        from yonghu
+        order by userId desc
+        limit #{startRows},5
+    </select>
+
+    <select id="allUser" resultType="int">
+        select count(*)
+        from yonghu
+    </select>
+
+    <select id="login"  resultType="com.example.guanli.domain.UpmsUser">
+        select *
+        from yonghu
+        where username=#{username}
+        and password=#{password}
+    </select>
+
+    <insert id="save">
+        insert into yonghu(username,password)
+        values (#{username},#{password})
+    </insert>
+
+    <update id="hot">
+        update yonghu
+        set hot=#{hot}
+        where userId=#{userId}
+    </update>
+
+    <select id="searchUser" resultType="com.example.guanli.domain.UpmsUser">
+        select *
+        from yonghu
+        where username like '%${name}%'
+    </select>
+
+</mapper>
